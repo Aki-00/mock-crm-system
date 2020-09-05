@@ -1,0 +1,50 @@
+
+    <div class="row justify-content-center">
+    <div class="container">
+        <div class="row">
+          <a routerLink="add"><button class="btn btn-success">Create account</button></a>
+        </div>
+      </div>
+      
+      
+      <div class="col-9">
+      <table class="table" >
+          <thead>
+            <tr>
+              <th scope="col">STT</th>
+              <th scope="col">Email</th>
+              <th scope="col">Firstname</th>
+              <th scope="col">Lastname</th>
+              <th scope="col">Gender</th>
+              <th scope="col">Role</th>
+            </tr>
+          </thead>
+          <tbody>
+             <tr *ngFor = 'let account of accounts'> 
+            <th scope="row">{{account.idAccount}}</th> 
+            <td>{{account.email}}</td>
+              <td>{{account.firstName}}</td>
+              <td>{{account.lastName}}</td>
+              <td>{{account.gender}}</td>
+              <td>{{account.nameRole}}</td>
+              <!-- <td>
+                  <ul appBorderColor class="list-inline m-0">
+                      <li class="list-inline-item">
+                          <a [routerLink]="['detail', product.id]"><button class="btn btn-primary btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="View"><i class="fa fa-table"></i></button></a>
+                      </li>
+                      <li class="list-inline-item">
+                        <a [routerLink]="['update', product.id]"><button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></button></a>
+                      </li>
+                      <li class="list-inline-item">
+                          <button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Delete" (click)="deleteProduct(product.id)"><i class="fa fa-trash"></i></button>
+                      </li>
+                  </ul> -->
+                  <!-- <a [routerLink]="['/detail', product.id]" data-tip="Quick View"><i class="fa fa-search"></i></a>
+                  <a routerLink="addproduct" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a> -->
+              <!-- </td>  -->
+            </tr> 
+          </tbody>
+        </table>
+      </div>
+    </div>
+      

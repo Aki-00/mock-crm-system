@@ -1,0 +1,107 @@
+
+<div class="container"> 
+<section class="panel panel-default">
+    <div class="panel-heading"> 
+      <h3 class="panel-title">Create Account</h3> 
+    </div> 
+      
+    <div class="panel-body">  
+      <form class="form-horizontal" role="form" [formGroup]="addAccountForm" (ngSubmit)="handleAddAccount()" >
+         <div class="form-group">
+          <label for="name" class="col-sm-3 control-label">Email<span style="color: red;">*</span></label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" formControlName="email" id="email" [ngClass]="{'has-error': addAccountForm.get('email').touched && addAccountForm.get('email').invalid}" placeholder="">
+            <li *ngIf="addAccountForm.get('email').value.length == 0 && addAccountForm.get('email').touched" class="text text-danger">Email Is Required</li>
+            <li *ngIf="addAccountForm.get('email').errors?.pattern && addAccountForm.get('email').touched" class="text text-danger">Email is not right format</li>
+          </div>    
+        </div> <!-- form-group // -->
+
+        <div class="form-group">
+          <label for="category" class="col-sm-3 control-label">First Name<span style="color: red;">*</span></label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" formControlName="firstName" id="firstName" [ngClass]="{'has-error': addAccountForm.get('firstName').touched && addAccountForm.get('firstName').invalid}" placeholder="">
+            <li *ngIf="addAccountForm.get('firstName').value.length == 0 && addAccountForm.get('firstName').touched" class="text text-danger">First Name Is Required</li>
+            <!-- <li *ngIf="addProductForm.get('category').errors.pattern && addProductForm.get('category').touched" class="text text-danger">Category Is Number Only</li> -->
+          </div>
+        </div> <!-- form-group // -->
+
+        <div class="form-group">
+          <label for="price" class="col-sm-3 control-label">Last Name<span style="color: red;">*</span></label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" formControlName="lastName" id="lastName" [ngClass]="{'has-error': addAccountForm.get('lastName').touched && addAccountForm.get('lastName').invalid}" placeholder="">
+            <li *ngIf="addAccountForm.get('lastName').invalid && addAccountForm.get('lastName').touched" class="text text-danger">Last Name Is Required</li>   
+          </div>
+        </div> <!-- form-group // -->
+    
+        <div class="form-group">
+            <label for="price" class="col-sm-3 control-label">Password <span style="color: red;">*</span></label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" formControlName="password" id="password" [ngClass]="{'has-error': addAccountForm.get('password').touched && addAccountForm.get('password').invalid}" placeholder="">
+              <li *ngIf="addAccountForm.get('password').invalid && addAccountForm.get('password').touched" class="text text-danger">Password Is Required</li>    
+            </div>
+        </div> <!-- form-group // -->
+    
+          <!-- <div class="form-group">
+            <label for="price" class="col-sm-3 control-label">Confirm Password</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" formControlName="regularPrice" id="regularPrice" [ngClass]="{'has-error': addAccountForm.get('regularPrice').touched && addAccountForm.get('regularPrice').invalid}" placeholder="">
+              <li *ngIf="addAccountForm.get('regularPrice').invalid && addAccountForm.get('regularPrice').touched" class="text text-danger">Price Is Required</li>
+      
+            </div> -->
+          <!-- </div> form-group // -->
+
+          <!-- <div class="custom-control custom-radio">
+            <input id="male" type="radio" class="custom-control-input" value="male" formControlName="gender" ngModel>
+            <label class="custom-control-label" for="male">Male</label>
+         </div>
+      
+         <div class="custom-control custom-radio">
+            <input id="female" type="radio" class="custom-control-input" value="female" formControlName="gender" ngModel>
+            <label class="custom-control-label" for="female">Female</label>
+         </div> -->
+         
+         
+          <div class="form-group">
+            <p>Please select gender:</p>
+            <label class="radio inline"> 
+            <input type="radio" name="gender" formControlName="gender" value="Male" checked>
+            <span> Male </span> 
+            </label>
+            <label class="radio inline"> 
+            <input type="radio" name="gender" formControlName="gender" value="Female">
+            <span>Female </span> 
+            </label>
+            <label class="radio inline"> 
+            <input type="radio" name="gender" formControlName="gender" value="Other">
+            <span>Other </span> 
+            </label>
+        </div>
+                            
+
+        <div class="form-group">
+            <p>Please select role:</p>
+            <label> 
+            <input type="radio" name="role" formControlName="role" value="admin" checked>
+            <span> Admin </span> 
+            </label>
+            <label> 
+            <input type="radio" name="role" formControlName="role" value="mode">
+            <span>Mode </span> 
+            </label>
+        </div>
+        
+        <hr>
+        <div class="form-group">
+          <div class="col-sm-offset-3 col-sm-9">
+            <button type="submit" class="btn btn-primary" [disabled]="!addAccountForm.valid">Submit</button>
+            <button type="button" class="btn btn-primary" (click)="resetForm()">Reset form</button>
+          </div>
+        </div> <!-- form-group // -->
+      </form>
+        
+      </div><!-- panel-body // -->
+    </section><!-- panel// -->
+      
+        
+    </div> <!-- container// -->
+    

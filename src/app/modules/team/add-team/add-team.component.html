@@ -1,0 +1,44 @@
+
+<div class="container"> 
+    <section class="panel panel-default">
+        <div class="panel-heading"> 
+          <h3 class="panel-title">Create Team</h3> 
+        </div> 
+          
+        <div class="panel-body">  
+          <form class="form-horizontal" role="form" [formGroup]="addteamForm" (ngSubmit)="handleAddTeam()" >
+            <div class="form-group">
+                <label for="category" class="col-sm-3 control-label">Team Name<span style="color: red;">*</span></label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" formControlName="teamName" id="teamName" [ngClass]="{'has-error': addteamForm.get('teamName').touched && addteamForm.get('teamName').invalid}" placeholder="">
+                  <li *ngIf="addteamForm.get('teamName').value.length == 0 && addteamForm.get('teamName').touched" class="text text-danger">Team Name Is Required</li>
+                </div>
+              </div> <!-- form-group // -->
+
+             
+              <div class="form-group">
+                <label for="category" class="col-sm-3 control-label">Team Lead Email<span style="color: red;">*</span></label> 
+                <div class="col-sm-9">
+                <select class="custom-select" formControlName="email">
+                    <option value="" disabled>Choose email</option>
+                    <option *ngFor="let email of emails" [ngValue]="email">{{email}}
+                    </option>
+                 </select>
+                 </div>
+            </div>
+            
+            <hr>
+            <div class="form-group">
+              <div class="col-sm-offset-3 col-sm-9">
+                <button type="submit" class="btn btn-primary" [disabled]="!addteamForm.valid">Submit</button>
+                <button type="button" class="btn btn-primary" (click)="resetForm()">Reset form</button>
+              </div>
+            </div> <!-- form-group // -->
+          </form>
+            
+          </div><!-- panel-body // -->
+        </section><!-- panel// -->
+          
+            
+        </div> <!-- container// -->
+        
