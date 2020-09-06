@@ -5,6 +5,11 @@ import { DefaulLayoutComponent} from './containers/defaul-layout/defaul-layout.c
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: 'accounts',
+    pathMatch: 'full'
+  },
+  {
     path:'',
     component: DefaulLayoutComponent,
     children:[

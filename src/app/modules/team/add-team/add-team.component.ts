@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Router} from '@angular/router';
 import { TeamService} from '../team.service';
 import { Team} from '../../../models/team'
+import { Store, select } from '@ngrx/store';
+import { Account} from '../../../models/account'
 
 @Component({
   selector: 'app-add-team',
@@ -11,24 +13,28 @@ import { Team} from '../../../models/team'
   styleUrls: ['./add-team.component.scss']
 })
 export class AddTeamComponent implements OnInit {
+ 
+  constructor(private fb:FormBuilder, private router:Router, private teamService:TeamService, private store: Store) {  
+   }
 
-  constructor(private fb:FormBuilder, private router:Router, private teamService:TeamService) { }
-
-  addteamForm:FormGroup
-  emails=["an@gmail.com", "linh@gmail.com"];
-
+  addteamForm:FormGroup;
+  accounts =[];
+  emails = [];
+  
   ngOnInit(): void {
     this.addteamForm = this.fb.group({
       teamName: ['', Validators.required],
       email: ['',Validators.required]
     });
+
+    this.teamService.getAccounts().subscribe((res:any) =>{
+      console.log("res", res);
+      this.accounts = res;
+      this.emails = this.accounts.map(a=>a.email);
+      console.log(this.emails);
+    })
+
   }
-  
-  // changeEmail(e) {
-  //   this.email.setValue(e.target.value, {
-  //     onlySelf: true
-  //   })
-  // }
 
   handleAddTeam(){
     const team:Team={
@@ -44,11 +50,10 @@ export class AddTeamComponent implements OnInit {
       }
     }
     )
-
-
   }
 
   resetForm(){
     this.addteamForm.reset();
   }
+
 }

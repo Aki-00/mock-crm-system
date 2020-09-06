@@ -10,6 +10,10 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { DefaulLayoutComponent } from './containers/defaul-layout/defaul-layout.component';
+import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -23,7 +27,13 @@ import { DefaulLayoutComponent } from './containers/defaul-layout/defaul-layout.
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    StoreModule.forRoot({
+      router: routerReducer
+    }),
+    EffectsModule.forRoot([]),
+    StoreDevtoolsModule.instrument(),
+    StoreRouterConnectingModule.forRoot({ stateKey: 'router'})
   ],
   providers: [],
   bootstrap: [AppComponent]

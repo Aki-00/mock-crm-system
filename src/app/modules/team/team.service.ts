@@ -20,4 +20,8 @@ export class TeamService {
     return this.http.post(`${this.url}/teams`, team, this.headers);
   }
 
+  getAccounts(){
+    return this.http.get(`${this.url}/accounts`, this.headers);
+  }
+
 }
