@@ -30,7 +30,6 @@ export class AddTeamComponent implements OnInit {
     });
 
     this.teamService.getAccounts().subscribe((res:any) =>{
-      console.log("res", res);
       this.accounts = res;
       this.emails = this.accounts.map(a=>a.email);
       console.log(this.emails);
@@ -57,9 +56,9 @@ export class AddTeamComponent implements OnInit {
           text: res.error.message,
         })
       }
-      // else{
-      //   this.router.navigateByUrl('/teams')
-      // }
+      else{
+        this.router.navigateByUrl('/teams')
+      }
     })
 
     // this.teamService.createTeam(team).subscribe((res)=>{
