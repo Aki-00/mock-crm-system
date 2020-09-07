@@ -26,6 +26,19 @@ export function teamReducer(state = initalState, action: any){
                 loaded: false
             }
         }
+
+        case teamActions.TeamActionsTypes.CREATE_TEAM_SUCCESS:{
+            return {
+                ...state,
+            }
+        }
+        case teamActions.TeamActionsTypes.CREATE_TEAM_FAIL:{
+            return{
+                ...state,
+                error: action.payload,
+                loaded: false
+            }
+        }
         default: {
             return state;
         } 

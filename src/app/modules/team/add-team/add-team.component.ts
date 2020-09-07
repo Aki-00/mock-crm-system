@@ -5,7 +5,9 @@ import { Router} from '@angular/router';
 import { TeamService} from '../team.service';
 import { Team} from '../../../models/team'
 import { Store, select } from '@ngrx/store';
-import { Account} from '../../../models/account'
+import { Account} from '../../../models/account';
+import * as teamActions from '../state/team.actions'
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-team',
@@ -43,13 +45,30 @@ export class AddTeamComponent implements OnInit {
     };
 
     console.log(team);
-    this.teamService.createTeam(team).subscribe((res)=>{
-      console.log('res', res);
+    this.store.dispatch(new teamActions.CreateTeam(team));
+
+    this.store.pipe(select((state: any) => state.teams.error)).subscribe((res) => {
+      console.log("res",res)
       if(res){
-        this.router.navigateByUrl('/teams')
+        console.log("res",res.error.message);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: res.error.message,
+        })
       }
-    }
-    )
+      // else{
+      //   this.router.navigateByUrl('/teams')
+      // }
+    })
+
+    // this.teamService.createTeam(team).subscribe((res)=>{
+    //   console.log('res', res);
+    //   if(res){
+    //     this.router.navigateByUrl('/teams')
+    //   }
+    // }
+    // )
   }
 
   resetForm(){
