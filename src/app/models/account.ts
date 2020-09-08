@@ -6,4 +6,5 @@ export interface Account {
     firstName: number;
     lastName: number;
     gender?: string;
+    team?:string;
 }

@@ -20,20 +20,21 @@ export class AddTeamComponent implements OnInit {
    }
 
   addteamForm:FormGroup;
-  accounts =[];
-  emails = [];
+  reg1 = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+  // accounts =[];
+  // emails = [];
   
   ngOnInit(): void {
     this.addteamForm = this.fb.group({
       teamName: ['', Validators.required],
-      email: ['',Validators.required]
+      email: ['', [Validators.required, Validators.pattern(this.reg1)]]
     });
 
-    this.teamService.getAccounts().subscribe((res:any) =>{
-      this.accounts = res;
-      this.emails = this.accounts.map(a=>a.email);
-      console.log(this.emails);
-    })
+    // this.teamService.getAccounts().subscribe((res:any) =>{
+    //   this.accounts = res;
+    //   this.emails = this.accounts.map(a=>a.email);
+    //   console.log(this.emails);
+    // })
 
   }
 

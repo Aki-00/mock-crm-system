@@ -25,8 +25,8 @@ export class AddAccountComponent implements OnInit {
       firstName: ['',Validators.required],
       lastName: ['', Validators.required],
       password: ['', Validators.required],
-      gender: [''],
-      role: ['']
+      gender: ['',Validators.required],
+      // role: ['']
     });
   }
 
@@ -37,7 +37,7 @@ export class AddAccountComponent implements OnInit {
       lastName: this.addAccountForm.get('lastName').value,
       password: this.addAccountForm.get('password').value,
       gender: this.addAccountForm.get('gender').value,
-      nameRole: this.addAccountForm.get('role').value
+      nameRole: "Adviser"
     };
 
     console.log(account);

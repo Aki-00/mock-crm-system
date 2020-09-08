@@ -15,8 +15,16 @@
                 </div>
               </div> <!-- form-group // -->
 
-             
               <div class="form-group">
+                <label for="category" class="col-sm-3 control-label">Team Lead Email<span style="color: red;">*</span></label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" formControlName="email" id="email" [ngClass]="{'has-error': addteamForm.get('email').touched && addteamForm.get('email').invalid}" placeholder="">
+                  <li *ngIf="addteamForm.get('email').value.length == 0 && addteamForm.get('email').touched" class="text text-danger">Email Is Required</li>
+                  <li *ngIf="addteamForm.get('email').errors?.pattern && addteamForm.get('email').touched" class="text text-danger">Email is not right format</li>
+                </div>
+              </div> <!-- form-group // -->
+
+              <!-- <div class="form-group">
                 <label for="category" class="col-sm-3 control-label">Team Lead Email<span style="color: red;">*</span></label> 
                 <div class="col-sm-9">
                 <select class="custom-select" formControlName="email">
@@ -25,7 +33,7 @@
                     </option>
                  </select>
                  </div>
-            </div>
+            </div> -->
             
             <hr>
             <div class="form-group">
