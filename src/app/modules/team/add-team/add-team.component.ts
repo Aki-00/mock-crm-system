@@ -49,8 +49,9 @@ export class AddTeamComponent implements OnInit {
 
     this.store.pipe(select((state: any) => state.teams.error)).subscribe((res) => {
       console.log("res",res)
-      if(res){
+      if(res=!null){
         console.log("res",res.error.message);
+        console.log("Fail");
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
@@ -58,7 +59,17 @@ export class AddTeamComponent implements OnInit {
         })
       }
       else{
-        this.router.navigateByUrl('/teams')
+        // Swal.fire(
+        //   'The Internet?',
+        //   'That thing is still around?',
+        //   'success'
+        // ).then((result)=>
+        // {
+        //   console.log("sucess");
+        //   this.router.navigateByUrl('/teams');
+        // }         
+        // ) 
+        console.log("sucess");   
       }
     })
 
