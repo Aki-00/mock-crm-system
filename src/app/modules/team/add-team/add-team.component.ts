@@ -45,20 +45,41 @@ export class AddTeamComponent implements OnInit {
     };
 
     console.log(team);
-    this.store.dispatch(new teamActions.CreateTeam(team));
+    // this.store.dispatch(new teamActions.CreateTeam(team));
 
-    this.store.pipe(select((state: any) => state.teams.error)).subscribe((res) => {
-      console.log("res",res)
-      if(res=!null){
-        console.log("res",res.error.message);
-        console.log("Fail");
+    this.teamService.createTeam(team).subscribe(
+      (data) => { 
+        console.log("sucess");
+        Swal.fire(
+          'Good job!',
+          'You created an team!',
+          'success'
+        )
+        this.router.navigateByUrl('/teams')
+      }, 
+      (error) => {
+        console.log("err", error.error.message); 
         Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: res.error.message,
-        })
-      }
-      else{
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: error.error.message,
+                })  
+      });
+    }
+      
+      
+      // (res) => {
+      // console.log("res",res)
+      // if(res=!null){
+      //   console.log("res",res.error);
+      //   console.log("Fail");
+        // Swal.fire({
+        //   icon: 'error',
+        //   title: 'Oops...',
+        //   text: res.error.message,
+        // })
+      // }
+      // else{
         // Swal.fire(
         //   'The Internet?',
         //   'That thing is still around?',
@@ -69,9 +90,9 @@ export class AddTeamComponent implements OnInit {
         //   this.router.navigateByUrl('/teams');
         // }         
         // ) 
-        console.log("sucess");   
-      }
-    })
+    //     console.log("sucess");   
+    //   }
+    // })
 
     // this.teamService.createTeam(team).subscribe((res)=>{
     //   console.log('res', res);
@@ -80,7 +101,7 @@ export class AddTeamComponent implements OnInit {
     //   }
     // }
     // )
-  }
+  // }
 
   resetForm(){
     this.addteamForm.reset();

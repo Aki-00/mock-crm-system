@@ -6,12 +6,13 @@ import { TeamService } from '../team.service';
 import { Team } from '../../../models/team';
 import { EMPTY, of, Observable } from 'rxjs';
 import { Action } from '@ngrx/store';
+import Swal from 'sweetalert2';
+import { Router} from '@angular/router';
 
 
 @Injectable()
 export class TeamEffects {
-
-    
+ 
     loadTeams$ = createEffect(() => this.actions$.pipe(
         ofType(teamActions.TeamActionsTypes.LOAD_TEAMS ),
         mergeMap(() => this.teamService.getTeams()
@@ -34,10 +35,9 @@ export class TeamEffects {
             return new teamActions.CreateTeamSuccess(newTeam)
           }
         ),
-        catchError(err => of(new teamActions.CreateTeamFail(err)))
-      )
-      )
-    );
+        catchError(err => of({ type: teamActions.TeamActionsTypes.CREATE_TEAM_FAIL, payload:  err}))
+        ))
+        );    
 
-      constructor(private actions$: Actions, private teamService: TeamService){}
+      constructor(private actions$: Actions, private teamService: TeamService, private router:Router){}
 }

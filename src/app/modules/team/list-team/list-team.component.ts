@@ -17,10 +17,10 @@ export class ListTeamComponent implements OnInit {
   ngOnInit(): void {
 
     this.store.dispatch(new teamActions.LoadTeams());
-    this.store.pipe(select((state: any) => state.teams)).subscribe((res) => {
+    this.store.pipe(select((state: any) => state.teams.data)).subscribe((res) => {
       console.log("res",res)
-      if(res.data.teams){
-        this.teams = res.data.teams
+      if(res.teams){
+        this.teams = res.teams
       }
     })
 

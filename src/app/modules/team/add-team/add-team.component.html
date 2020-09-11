@@ -18,7 +18,13 @@
               <div class="form-group">
                 <label for="category" class="col-sm-3 control-label">Team Lead Email<span style="color: red;">*</span></label>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control" formControlName="email" id="email" [ngClass]="{'has-error': addteamForm.get('email').touched && addteamForm.get('email').invalid}" placeholder="">
+                  <input type="text" class="form-control" formControlName="email" id="email" [ngClass]="{'has-error': addteamForm.get('email').touched && addteamForm.get('email').invalid}" placeholder=""  [matAutocomplete]="auto">
+                  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                    <mat-option *ngFor="let user of (filteredUsers | async)?.results" [value]="user">
+                      <span>{{ user.name }}</span>
+                      <small> | ID: {{user.id}}</small>
+                    </mat-option>
+                  </mat-autocomplete>
                   <li *ngIf="addteamForm.get('email').value.length == 0 && addteamForm.get('email').touched" class="text text-danger">Email Is Required</li>
                   <li *ngIf="addteamForm.get('email').errors?.pattern && addteamForm.get('email').touched" class="text text-danger">Email is not right format</li>
                 </div>

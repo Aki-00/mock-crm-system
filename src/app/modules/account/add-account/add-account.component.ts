@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Router} from '@angular/router';
 import { Account} from '../../../models/account'
 import { AccountService} from '../account.service';
+import Swal from 'sweetalert2';
 
 
 
@@ -41,15 +42,49 @@ export class AddAccountComponent implements OnInit {
     };
 
     console.log(account);
-    this.accountService.createAccount(account).subscribe((res)=>{
-      console.log('res', res);
-      if(res){
+    this.accountService.createAccount(account).subscribe(
+      (data) => { 
+        console.log("sucess");
+        Swal.fire(
+          'Good job!',
+          'You created an account!',
+          'success'
+        )
         this.router.navigateByUrl('/accounts')
-      }
+      }, 
+      (error) => {
+        console.log("err", error.error.message); 
+        Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: error.error.message,
+                })  
+      });
     }
-    )
+      
+      
+  //     (res)=>{
+  //     console.log('res', res);
+  //     if(res){
 
-  }
+  //          Swal.fire(
+  //         'Account is created successfully',
+  //         'success'
+  //         )
+  //       this.router.navigateByUrl('/accounts')
+  //     }
+  //     if(Error){
+  //       console.log("fail")
+  //        Swal.fire({
+  //         icon: 'error',
+  //         title: 'Oops...',
+  //         text: Error.error.message,
+  //       })
+  //     }
+  //   }
+  //   )
+
+  // }
 
   resetForm(){
     this.addAccountForm.reset();
