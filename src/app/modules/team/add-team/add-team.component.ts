@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators, FormGroup} from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, FormControl} from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Router} from '@angular/router';
 import { TeamService} from '../team.service';
@@ -8,6 +8,9 @@ import { Store, select } from '@ngrx/store';
 import { Account} from '../../../models/account';
 import * as teamActions from '../state/team.actions'
 import Swal from 'sweetalert2';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @Component({
   selector: 'app-add-team',
@@ -20,9 +23,12 @@ export class AddTeamComponent implements OnInit {
    }
 
   addteamForm:FormGroup;
+  myControl = new FormControl();
   reg1 = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-  // accounts =[];
-  // emails = [];
+  accounts =[];
+  emails = [];
+  filteredOptions: Observable<string[]>;
+
   
   ngOnInit(): void {
     this.addteamForm = this.fb.group({
@@ -30,12 +36,22 @@ export class AddTeamComponent implements OnInit {
       email: ['', [Validators.required, Validators.pattern(this.reg1)]]
     });
 
-    // this.teamService.getAccounts().subscribe((res:any) =>{
-    //   this.accounts = res;
-    //   this.emails = this.accounts.map(a=>a.email);
-    //   console.log(this.emails);
-    // })
+    this.teamService.getAccounts().subscribe((res:any) =>{
+      this.accounts = res;
+      this.emails = this.accounts.map(a=>a.email);
 
+      this.filteredOptions = this.myControl.valueChanges
+    .pipe(
+      startWith(''),
+      map(value => this._filter(value))
+    );
+    })
+  }
+//Filter email
+  private _filter(value: string): string[] {
+    console.log(this.emails);
+    const filterValue = value.toString().toLowerCase();
+    return this.emails.filter(email => email.toLowerCase().includes(filterValue));
   }
 
   handleAddTeam(){

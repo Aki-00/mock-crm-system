@@ -12,6 +12,9 @@ import { TeamRoutingModule } from './team-routing.module';
 import { ListTeamComponent } from './list-team/list-team.component';
 import { AddTeamComponent } from './add-team/add-team.component';
 
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatInputModule} from '@angular/material/input';
+
 
 @NgModule({
   declarations: [ListTeamComponent, AddTeamComponent],
@@ -22,7 +25,13 @@ import { AddTeamComponent } from './add-team/add-team.component';
     FormsModule,
     AccountModule,
     StoreModule.forFeature("teams", teamReducer),
-    EffectsModule.forFeature([TeamEffects])
+    EffectsModule.forFeature([TeamEffects]),
+    MatAutocompleteModule,
+    MatInputModule
+  ],
+  exports:[
+    MatInputModule,
+    MatAutocompleteModule
   ]
 })
 export class TeamModule { }
