@@ -7,4 +7,6 @@ export interface Account {
     lastName: number;
     gender?: string;
     team?:string;
+    roleInTeam?:string;
+    isChecked?:boolean;
 }

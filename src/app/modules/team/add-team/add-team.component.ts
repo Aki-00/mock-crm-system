@@ -23,7 +23,7 @@ export class AddTeamComponent implements OnInit {
    }
 
   addteamForm:FormGroup;
-  myControl = new FormControl();
+  email = new FormControl();
   reg1 = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
   accounts =[];
   emails = [];
@@ -40,7 +40,7 @@ export class AddTeamComponent implements OnInit {
       this.accounts = res;
       this.emails = this.accounts.map(a=>a.email);
 
-      this.filteredOptions = this.myControl.valueChanges
+      this.filteredOptions = this.addteamForm.get("email").valueChanges
     .pipe(
       startWith(''),
       map(value => this._filter(value))
@@ -58,6 +58,7 @@ export class AddTeamComponent implements OnInit {
     const team:Team={
       teamName: this.addteamForm.get('teamName').value,
       email: this.addteamForm.get('email').value
+      // email:this.email
     };
 
     console.log(team);
@@ -81,6 +82,11 @@ export class AddTeamComponent implements OnInit {
                   text: error.error.message,
                 })  
       });
+    }
+
+    updateMySelection(value){
+      this.email = value;
+      console.log(this.email)
     }
       
       

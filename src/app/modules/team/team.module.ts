@@ -14,10 +14,12 @@ import { AddTeamComponent } from './add-team/add-team.component';
 
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material/input';
+import { TeamDetailComponent } from './team-detail/team-detail.component';
+import { AddAccountToTeamComponent } from './add-account-to-team/add-account-to-team.component';
 
 
 @NgModule({
-  declarations: [ListTeamComponent, AddTeamComponent],
+  declarations: [ListTeamComponent, AddTeamComponent, TeamDetailComponent, AddAccountToTeamComponent],
   imports: [
     CommonModule,
     TeamRoutingModule,

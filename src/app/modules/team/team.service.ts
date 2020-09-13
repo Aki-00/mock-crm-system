@@ -1,27 +1,47 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Team }  from '../../models/team';
+import { environment } from '../../../environments/environment';
+import { BaseService } from '../../servives/base.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TeamService {
+export class TeamService extends BaseService{
 
-  constructor(private http: HttpClient) { }
-
-  private url: string = 'http://139.180.133.146:8080/api/admin/v1';
-  headers = {headers: {'Content-Type': 'application/json'}};
+  baseUrl = "http://139.180.133.146:8080/api/admin/v1";
 
   getTeams(){
-    return this.http.get(`${this.url}/teams`, this.headers);
+    console.log(this.baseUrl);
+    return this.httpGet(`${this.baseUrl}/teams`);
+    // return this.http.get(`${this.url}/teams`, this.headers);
   }
 
+  // getTeam(id){
+  //   return this.http.get(`${this.url}/teams`, this.headers);
+  // }
+
   createTeam(team: Team){
-    return this.http.post(`${this.url}/teams`, team, this.headers);
+    return this.httpPost(`${this.baseUrl}/teams`,team);
   }
 
   getAccounts(){
-    return this.http.get(`${this.url}/accounts`, this.headers);
+    return this.httpGet(`${this.baseUrl}/accounts`);
   }
 
+  getAccountsInTeam(idTeam){
+    return this.httpGet(`${this.baseUrl}/teamDetails/?idTeam=${idTeam}`)
+  }
+
+  removeAccountsFromTeam(idTeam:number[], listIdAccount:number[]){
+    return this.httpDelete(`${this.baseUrl}/teamDetails`,{idTeam, listIdAccount});
+  }
+
+  getAccountsNotInTeam(idTeam){
+    return this.httpGet(`${this.baseUrl}/teamDetails/accountNotInTeam?idTeam=${idTeam}`);
+  }
+
+  addAccountToTeam(idTeam:number[], listIdAccount:number[]){
+    return this.httpPost(`${this.baseUrl}/teamDetails`,{idTeam, listIdAccount});
+  }
 }

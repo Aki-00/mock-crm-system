@@ -15,14 +15,16 @@ export class ListTeamComponent implements OnInit {
   teams=[];
 
   ngOnInit(): void {
-
-    this.store.dispatch(new teamActions.LoadTeams());
-    this.store.pipe(select((state: any) => state.teams.data)).subscribe((res) => {
-      console.log("res",res)
-      if(res.teams){
-        this.teams = res.teams
-      }
+    this.teamService.getTeams().subscribe(res=>{
+      this.teams = res;
     })
+    // this.store.dispatch(new teamActions.LoadTeams());
+    // this.store.pipe(select((state: any) => state.teams.data)).subscribe((res) => {
+    //   console.log("res",res)
+    //   if(res.teams){
+    //     this.teams = res.teams
+    //   }
+    // })
 
     // this.teamService.getTeams().subscribe((res:any)=>{
     //   this.teams=res;
