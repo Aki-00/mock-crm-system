@@ -28,7 +28,10 @@ export class TeamDetailComponent implements OnInit {
       this.idTeam = res.id;
       this.idTeams.push(this.idTeam);
       this.teamService.getAccountsInTeam(this.idTeam).subscribe((res: any) => {
-       this.accounts = res;
+        console.log(res)
+       this.accounts = res.teamMember;
+       this.accounts.forEach(a=>
+       console.log(a.roleInTeam))
       //  this.fetchSelectedItems();
        this.fetchCheckedIDs();       
       })     

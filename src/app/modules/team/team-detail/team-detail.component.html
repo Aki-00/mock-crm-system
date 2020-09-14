@@ -42,9 +42,9 @@
                         <input type="checkbox" class="custom-control-input" id="{{account.idAccount}}" checked>
                     </div> -->
                   </td>
-                <td>{{i+1}}</td>
-                <td>{{account.lastName + " " + account.firstName}}</td>
-                  <td>{{account.email}}</td>
+                <td ng-style="account.roleInTeam === 'Leader' ?  {'color': 'blue'} : {'color': 'black'}">{{i+1}}</td>
+                <td ng-style="account.roleInTeam === 'Leader' ?  {'color': 'blue'} : {'color': 'black'}">{{account.lastName + " " + account.firstName}}</td>
+                  <td ng-style="account.roleInTeam === 'Leader' ?  {'color': 'blue'} : {'color': 'black'}">{{account.email}}</td>
                   <!-- <td>
                       <ul appBorderColor class="list-inline m-0">
                         <li class="list-inline-item">
