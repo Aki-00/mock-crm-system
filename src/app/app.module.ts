@@ -37,7 +37,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument(),
     StoreRouterConnectingModule.forRoot({ stateKey: 'router'}),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

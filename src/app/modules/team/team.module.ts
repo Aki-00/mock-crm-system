@@ -17,6 +17,7 @@ import {MatInputModule} from '@angular/material/input';
 import { TeamDetailComponent } from './team-detail/team-detail.component';
 import { AddAccountToTeamComponent } from './add-account-to-team/add-account-to-team.component';
 
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [ListTeamComponent, AddTeamComponent, TeamDetailComponent, AddAccountToTeamComponent],
@@ -29,11 +30,13 @@ import { AddAccountToTeamComponent } from './add-account-to-team/add-account-to-
     StoreModule.forFeature("teams", teamReducer),
     EffectsModule.forFeature([TeamEffects]),
     MatAutocompleteModule,
-    MatInputModule
+    MatInputModule,
+    MatDialogModule
   ],
   exports:[
     MatInputModule,
     MatAutocompleteModule
-  ]
+  ],
+  entryComponents:[AddAccountToTeamComponent]
 })
 export class TeamModule { }

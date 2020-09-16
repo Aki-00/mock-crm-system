@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class TeamService extends BaseService{
 
-  baseUrl = "http://139.180.133.146:8080/api/admin/v1";
+  baseUrl = "https://moly7x.codes/api/admin/v1";
 
   getTeams(){
     console.log(this.baseUrl);
@@ -43,5 +43,15 @@ export class TeamService extends BaseService{
 
   addAccountToTeam(idTeam:number[], listIdAccount:number[]){
     return this.httpPost(`${this.baseUrl}/teamDetails`,{idTeam, listIdAccount});
+  }
+
+  // search(terms: Observable<string>) {
+  //   return terms.debounceTime(400)
+  //     .distinctUntilChanged()
+  //     .switchMap(term => this.searchAccount(term));
+  // }
+
+  searchAccount(term:string){
+    return this.httpGet(`${this.baseUrl}/accounts/search?search=${term}`)
   }
 }

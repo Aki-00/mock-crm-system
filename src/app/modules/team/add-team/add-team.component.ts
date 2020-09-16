@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-add-team',
@@ -20,6 +21,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 export class AddTeamComponent implements OnInit {
  
   constructor(private fb:FormBuilder, private router:Router, private teamService:TeamService, private store: Store) {  
+
    }
 
   addteamForm:FormGroup;
@@ -40,25 +42,36 @@ export class AddTeamComponent implements OnInit {
       this.accounts = res;
       this.emails = this.accounts.map(a=>a.email);
 
-      this.filteredOptions = this.addteamForm.get("email").valueChanges
+      this.filteredOptions=this.addteamForm.get("email").valueChanges
     .pipe(
       startWith(''),
       map(value => this._filter(value))
     );
     })
   }
-//Filter email
+// Filter email
   private _filter(value: string): string[] {
     console.log(this.emails);
     const filterValue = value.toString().toLowerCase();
     return this.emails.filter(email => email.toLowerCase().includes(filterValue));
   }
 
+  // private _filter(value: string) {
+    
+  //   this.teamService.searchAccount(value).subscribe(res=>{
+  //     this.accounts=res;
+  //     this.emails=this.accounts.map(a=>a.email);
+  //     console.log(this.emails);
+  //     const filterValue = value.toString().toLowerCase();
+  //   return this.emails.filter(email => email.toLowerCase().includes(filterValue));
+  //   })
+    
+  // }
+
   handleAddTeam(){
     const team:Team={
       teamName: this.addteamForm.get('teamName').value,
       email: this.addteamForm.get('email').value
-      // email:this.email
     };
 
     console.log(team);

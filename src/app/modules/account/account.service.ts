@@ -9,7 +9,7 @@ export class AccountService {
 
   constructor(private http: HttpClient) { }
 
-  private url: string = 'http://139.180.133.146:8080/api/admin/v1';
+  private url: string = 'https://moly7x.codes/api/admin/v1';
   headers = {headers: {'Content-Type': 'application/json'}};
   account = [];
 

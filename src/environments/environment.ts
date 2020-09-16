@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  BASE_URL: 'http://139.180.133.146:8080/api/admin/v1'
+  BASE_URL: 'https://moly7x.codes/api/admin/v1'
 };
 
 /*

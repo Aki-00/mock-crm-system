@@ -3,6 +3,7 @@ import { Account} from '../../../models/account';
 import { TeamService} from '../team.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-add-account-to-team',
@@ -11,7 +12,8 @@ import Swal from 'sweetalert2';
 })
 export class AddAccountToTeamComponent implements OnInit {
 
-  constructor(private teamService:TeamService, private router: ActivatedRoute,private _router:Router) { }
+  constructor(private teamService:TeamService, private router: ActivatedRoute,private _router:Router, private dialogRef: MatDialogRef<AddAccountToTeamComponent>,
+ ) { }
   accounts:Account[];
   selectedItemsList = [];
   checkedIDs = [];
@@ -75,4 +77,8 @@ export class AddAccountToTeamComponent implements OnInit {
                 })  
       });
   }
+
+  close() {
+    this.dialogRef.close();
+}
 }

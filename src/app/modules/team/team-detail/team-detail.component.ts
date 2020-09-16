@@ -4,6 +4,9 @@ import { TeamService} from '../team.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import { AddAccountToTeamComponent } from '../add-account-to-team/add-account-to-team.component';
+
 @Component({
   selector: 'app-team-detail',
   templateUrl: './team-detail.component.html',
@@ -11,12 +14,13 @@ import Swal from 'sweetalert2';
 })
 export class TeamDetailComponent implements OnInit {
 
-  constructor(private teamService:TeamService, private router: ActivatedRoute ) { }
+  constructor(private teamService:TeamService, private router: ActivatedRoute, private dialog: MatDialog ) { }
   accounts:Account[];
   selectedItemsList = [];
   checkedIDs = [];
   idTeams =[];
   idTeam:number;
+  teamName:string;
 
   ngOnInit(): void {
     this.fetchData();
@@ -30,6 +34,8 @@ export class TeamDetailComponent implements OnInit {
       this.teamService.getAccountsInTeam(this.idTeam).subscribe((res: any) => {
         console.log(res)
        this.accounts = res.teamMember;
+       this.teamName = res.teamInfo.teamName;
+
        this.accounts.forEach(a=>
        console.log(a.roleInTeam))
       //  this.fetchSelectedItems();
@@ -91,5 +97,25 @@ export class TeamDetailComponent implements OnInit {
       });
   }
 
+  getColor(role){
+    switch (role){
+      case 'Leader':
+        return 'blue';
+      case 'Member':
+        return 'black'
+    }
+  }
+
+  openDialog() {
+
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    dialogConfig.data = this.accounts;
+
+    this.dialog.open(AddAccountToTeamComponent, dialogConfig);
+}
 
 }

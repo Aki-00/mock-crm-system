@@ -15,6 +15,21 @@
                 </div>
               </div> <!-- form-group // -->
 
+                       
+              <!-- <div class="form-group">
+                <label for="category" class="col-sm-3 control-label">Team Lead Email<span style="color: red;">*</span></label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" formControlName="email" id="email" (keyup)="searchTerm$.next($event.target.value)" [ngClass]="{'has-error': addteamForm.get('email').touched && addteamForm.get('email').invalid}" placeholder="">
+                  <ul *ngIf="results">
+                    <li *ngFor="let result of results | slice:0:9">
+                        {{ result }}
+                    </li>
+                  </ul>
+                  <li *ngIf="addteamForm.get('email').value.length == 0 && addteamForm.get('email').touched" class="text text-danger">Email Is Required</li>
+                  <li *ngIf="addteamForm.get('email').errors?.pattern && addteamForm.get('email').touched" class="text text-danger">Email is not right format</li>
+                </div>
+              </div> -->
+
               <!-- <div class="form-group">
                 <label for="category" class="col-sm-3 control-label">Team Lead Email<span style="color: red;">*</span></label>
                 <div class="col-sm-9">
@@ -40,12 +55,17 @@
                        formControlName="email"
                        [formControl]="email"
                        [matAutocomplete]="auto"
-                       (optionSelected)='updateMySelection($event)'>
+                       (optionSelected)='updateMySelection($event)'
+                       [ngClass]="{'has-error': addteamForm.get('email').touched && addteamForm.get('email').invalid}">
+              
                 <mat-autocomplete #auto="matAutocomplete">
                   <mat-option *ngFor="let email of filteredOptions | async" [value]="email">
                     {{email}}
                   </mat-option>
                 </mat-autocomplete>
+       
+                <li *ngIf="addteamForm.get('email').value.length == 0 && addteamForm.get('email').touched" class="text text-danger">Email Is Required</li>
+                  <li *ngIf="addteamForm.get('email').errors?.pattern && addteamForm.get('email').touched" class="text text-danger">Email is not right format</li>
               </mat-form-field>
                 </div>
                </div>
