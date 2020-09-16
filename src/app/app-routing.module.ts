@@ -4,11 +4,7 @@ import { CommonModule} from '@angular/common';
 import { DefaulLayoutComponent} from './containers/defaul-layout/defaul-layout.component'
 
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'accounts',
-    pathMatch: 'full'
-  },
+ 
   {
     path:'',
     component: DefaulLayoutComponent,

@@ -112,10 +112,13 @@ export class TeamDetailComponent implements OnInit {
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
+    this.teamService.getAccountsNotInTeam(this.idTeam).subscribe(res=>{
+      this.dialog.open(AddAccountToTeamComponent, {
+        panelClass: 'my-centered-dialog',
+        data:{accounts :res}
+        });
+    })
 
-    dialogConfig.data = this.accounts;
-
-    this.dialog.open(AddAccountToTeamComponent, dialogConfig);
 }
 
 }
