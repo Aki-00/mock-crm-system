@@ -108,14 +108,13 @@ export class TeamDetailComponent implements OnInit {
 
   openDialog() {
 
-    const dialogConfig = new MatDialogConfig();
-
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-
-    dialogConfig.data = this.accounts;
-
-    this.dialog.open(AddAccountToTeamComponent, dialogConfig);
-}
+    this.teamService.getAccountsNotInTeam(this.idTeam).subscribe(res=>{
+      this.dialog.open(AddAccountToTeamComponent, {
+        panelClass: 'my-centered-dialog',
+        disableClose: true,
+        data:{accounts :res}
+        });
+    })
+  }
 
 }
