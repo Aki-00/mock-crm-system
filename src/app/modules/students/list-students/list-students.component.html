@@ -1,0 +1,202 @@
+<!-- 
+<div class="row justify-content-center">
+     <div class="container">
+         <div class="row">
+             <div class="col-6">
+                 <h3>Student list</h3>
+             </div>    
+             <div class ="col text-right">      
+           <a><button class="btn btn-success mr-3">Import Excel</button></a>            
+             <a routerLink="assignTeam"><button class="btn btn-success mr-3" (click)="passID()">Assign to Team</button></a>
+             <a routerLink="assignAdvisor"><button class="btn btn-success" (click)="passID()">Assign to Advisor</button></a>
+           
+              </div>  
+         </div>
+       </div>
+            
+       <div class="col-9">
+       <table class="table" >
+           <thead>
+             <tr>
+               <th scope="col">Check</th>
+               <th scope="col">No</th>
+               <th scope="col">Name</th>
+               <th scope="col">Source</th>
+               <th scope="col">Phone Number</th>
+               <th scope="col">Target</th>
+               <th scope="col">Status</th>
+               <th scope="col">Team Name</th>
+
+             </tr>
+           </thead>
+           <tbody>
+              <tr *ngFor = 'let student of students; let i = index'> 
+        
+             <td>
+                 <div class="form-check">
+                     <input class="form-check-input position-static" type="checkbox" id="{{student.phoneNumber}}" name="{{student.phoneNumber}}" [(ngModel)]="student.isChecked" (change)="changeSelection()">
+                   </div>
+                
+               </td>
+             <td>{{i+1}}</td>
+             <td>{{student.lastName + " " + student.firstName}}</td>
+               <td>{{student.source}}</td>
+               <td>{{student.phoneNumber}}</td>
+               <td>{{student.targets}}</td>
+               <td>{{student.status}}</td>
+               <td>{{student.teamName}}</td>
+               
+             </tr> 
+           </tbody>
+         </table>
+         
+       </div>
+     </div> -->
+       
+
+
+ 
+        <!-- <p-table [value]="students">
+          <ng-template pTemplate="header">
+              <tr>
+                <th>Check</th>
+                <th>No</th>
+                <th>Name</th>
+                <th>Source</th>
+                <th>Phone Number</th>
+                <th>Target</th>
+                <th>Status</th>
+                <th>Team Name</th>
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-student>
+              <tr>
+                <td>1</td>
+                    <td>{{i+1}}</td>
+                    <td>{{student.lastName + " " + student.firstName}}</td>
+                      <td>{{student.source}}</td>
+                      <td>{{student.phoneNumber}}</td>
+                      <td>{{student.targets}}</td>
+                      <td>{{student.status}}</td>
+                      <td>{{student.teamName}}</td>
+              </tr>
+          </ng-template>
+      </p-table> -->
+
+<!-- <div class="row justify-content-center"> -->
+  <div class="container">
+    <div class="row">
+            <h3>Student list</h3>
+    </div>
+    <div class ="row">
+      <div class="col-md-6">  
+        <input class="form-control" type="file" #fileInput />        
+    </div>  
+    <div>  
+        <button class="btn btn-success" (click)="uploadFile()">Upload</button>  
+    </div> 
+    
+    <div class ="col text-right">
+      <!-- <a routerLink="assignTeam"><button class="btn btn-success mr-3" (click)="passID()">Assign to Team</button></a> -->
+      <button class="btn btn-success mr-3" (click)="showTeamDialog()">Assign to Team</button>
+      <!-- <a routerLink="assignAdvisor"><button class="btn btn-success" (click)="passID()">Assign to Advisor</button></a> -->
+      <button class="btn btn-success" (click)="showAdvisorDialog()">Assign to Advisor</button>
+    </div> 
+    </div>   
+<br>
+      <!-- <div class="col"> -->
+      <p-table #dt [columns]="cols" [value]="students" [paginator]="true" [rows]="10"
+      [filterDelay]="0"
+      [(selection)]="selectedStudents" dataKey="phoneNumber" autoLayout="true">
+        <ng-template pTemplate="caption">
+          <div class="table-header">
+            <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="         Global Search" style="width:auto">
+            </span>
+        </div>
+        </ng-template>
+        <ng-template pTemplate="header" class="thead-dark">
+            <tr>
+              <th style="width: 3rem"></th>
+              <th>No</th>
+              <th>Name</th>
+                <!-- <th>Last Name</th>                -->
+                <th>Source</th>
+                <th>Phone</th>
+                <th>Target</th>
+                <th>Status</th>
+                <th>Team Name</th>
+            </tr>
+            <tr>
+              <th>
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+              </th>
+              <th style="width: 3rem"></th>
+              <th style="width: 3rem"></th>
+              <!-- <th>
+                <input pInputText type="text" (input)="dt.filter($event.target.value, 'lastName', 'startsWith')" placeholder="Search by Last Name" class="p-column-filter">
+                 </th> -->
+              <!-- <th>
+              <input pInputText type="text" (input)="dt.filter($event.target.value, 'firstName', 'startsWith')" placeholder="Search by First Name" class="p-column-filter">
+              </th> -->
+               <th>
+              <input pInputText type="text" (input)="dt.filter($event.target.value, 'source', 'startsWith')" placeholder="Search Source" class="p-column-filter" style="width:100%;font-size: 15px">
+              </th>
+              <th style="width: 3rem"></th>
+              <th>
+                <input pInputText type="text" (input)="dt.filter($event.target.value, 'targets', 'startsWith')" placeholder="Search Target" class="p-column-filter" style="width:100%;font-size: 15px">
+                </th>
+                <th>
+                  <input pInputText type="text" (input)="dt.filter($event.target.value, 'status', 'startsWith')" placeholder="Search Status" class="p-column-filter" style="width:100%;font-size: 15px">
+                  </th>
+                  <th>
+                    <input pInputText type="text" (input)="dt.filter($event.target.value, 'teamName', 'startsWith')" placeholder="Search Team" class="p-column-filter" style="width:100%;font-size: 15px">
+                    </th>
+             <!-- <th>
+              <input pInputText type="text" (input)="dt.filter($event.target.value, 'phoneNumber', 'startsWith')" placeholder="Search by Phone Number" class="p-column-filter">
+               </th>-->
+               <!-- <th> 
+               <p-dropdown appendTo="body" [options]="targetses" (onChange)="dt.filter($event.value, 'targets', 'equals')" styleClass="p-column-filter" placeholder="Select a Target" [showClear]="true">
+                <ng-template let-option pTemplate="item">
+                    <span [class]="'customer-badge status-' + option.value">{{option}}</span>
+                </ng-template>
+                </p-dropdown>
+              </th>
+              <th>
+                <p-dropdown appendTo="body" [options]="statuses" (onChange)="dt.filter($event.value, 'status', 'equals')" styleClass="p-column-filter" placeholder="Select a Status" [showClear]="true">
+                    <ng-template let-option pTemplate="item">
+                        <span [class]="'customer-badge status-' + option.value">{{option}}</span>
+                    </ng-template>
+                </p-dropdown>
+               </th>
+               <th>
+                <p-dropdown appendTo="body" [options]="teams" (onChange)="dt.filter($event.value, 'team', 'equals')" styleClass="p-column-filter" placeholder="Select a Team" [showClear]="true">
+                    <ng-template let-option pTemplate="item">
+                        <span [class]="'customer-badge status-' + option.value">{{option}}</span>
+                    </ng-template>
+                </p-dropdown>
+               </th> -->
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-student let-i="rowIndex">
+          <tr class="p-selectable-row">
+            <td>
+              <p-tableCheckbox [value]="student"></p-tableCheckbox>
+          </td>
+          <td>{{i+1}}</td>
+          <td>{{student.lastName + " " + student.firstName}}</td>
+          <!-- <td>{{student.firstName}} </td> -->
+          <td>{{student.source}}</td>
+          <td>{{student.phoneNumber}}</td>
+          <td>{{student.targets}}</td>
+          <td>{{student.status}}</td>
+          <td>{{student.teamName}}</td>
+
+          </tr>
+        </ng-template>
+    </p-table>
+<!-- </div> -->
+</div>
+<!-- </div> -->

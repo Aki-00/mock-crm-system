@@ -100,9 +100,9 @@ export class TeamDetailComponent implements OnInit {
   getColor(role){
     switch (role){
       case 'Leader':
-        return 'blue';
+        return 'bold';
       case 'Member':
-        return 'black'
+        return 'normal'
     }
   }
 

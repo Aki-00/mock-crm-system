@@ -3,8 +3,9 @@ export interface Account {
     email: string;
     password: string;
     nameRole?: string;
-    firstName: number;
-    lastName: number;
+    firstName: string;
+    lastName: string;
+    fullName?:string;
     gender?: string;
     team?:string;
     roleInTeam?:string;

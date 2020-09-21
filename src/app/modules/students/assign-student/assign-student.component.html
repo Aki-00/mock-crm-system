@@ -1,0 +1,81 @@
+
+<div class="container"> 
+    <section class="panel panel-default">
+        <div class="panel-heading"> 
+          <h3 class="panel-title">Assign to team</h3> 
+        </div> 
+
+        <div class="panel-body">  
+          <form class="form-horizontal" role="form" [formGroup]="assignStudentForm" (ngSubmit)="handleAssignStudent()" >
+               <div class="form-group">
+                <label for="category" class="col-sm-3 control-label">Team Name<span style="color: red;">*</span></label>
+                <div class="col-sm-9">
+              <mat-form-field style="border: gray;">
+                <input type="text"
+                       placeholder=""
+                       aria-label="Number"
+                       matInput
+                       formControlName="team"
+                       [formControl]="team"
+                       [matAutocomplete]="teamAuto"
+                       (optionSelected)='updateMySelection($event)'
+                       (change)="checkTeam($event)"
+                       [ngClass]="{'has-error': assignStudentForm.get('team').touched && assignStudentForm.get('team').invalid}">
+              
+                <mat-autocomplete #teamAuto="matAutocomplete" [displayWith]="displayTeam">
+                  <mat-option *ngFor="let team of teamFilteredOptions| async" [value]="team">
+                    {{team.teamName}}
+                  </mat-option>
+                </mat-autocomplete>
+       
+                <!-- <li *ngIf="addteamForm.get('email').value.length == 0 && addteamForm.get('email').touched" class="text text-danger">Email Is Required</li>
+                  <li *ngIf="addteamForm.get('email').errors?.pattern && addteamForm.get('email').touched" class="text text-danger">Email is not right format</li> -->
+              </mat-form-field>
+                </div>
+               </div>
+
+
+               <!-- <div class="form-group">
+                <label for="category" class="col-sm-3 control-label">Advisor<span style="color: red;">*</span></label>
+                <div class="col-sm-9">
+              <mat-form-field style="border: gray;">
+                <input type="text"
+                       placeholder=""
+                       aria-label="Number"
+                       matInput
+                       formControlName="account"
+                       [formControl]="account"
+                       [matAutocomplete]="accountAuto"
+                       (optionSelected)='updateMySelection($event)'
+                       (change)="checkInputAccount($event)"
+                       [ngClass]="{'has-error': assignStudentForm.get('account').touched && assignStudentForm.get('account').invalid}">
+              
+                <mat-autocomplete #accountAuto="matAutocomplete" [displayWith]="displayAccount">
+                  <mat-option *ngFor="let account of accountFilteredOptions | async" [value]="account">
+                    {{account.firstName + " " +account.lastName}} 
+                  </mat-option>
+                </mat-autocomplete> -->
+       
+                <!-- <li *ngIf="addteamForm.get('email').value.length == 0 && addteamForm.get('email').touched" class="text text-danger">Email Is Required</li>
+                  <li *ngIf="addteamForm.get('email').errors?.pattern && addteamForm.get('email').touched" class="text text-danger">Email is not right format</li> -->
+              <!-- </mat-form-field>
+                </div>
+               </div> -->
+          
+
+            
+            <hr>
+            <div class="form-group">
+              <div class="col-sm-offset-3 col-sm-9">
+                <button type="submit" class="btn btn-primary mr-3" [disabled]="!assignStudentForm.valid">Submit</button>
+                <a routerLink="/students"><button type="button" class="btn btn-secondary">Cancel</button></a>
+              </div>
+            </div> <!-- form-group // -->
+          </form>
+            
+          </div><!-- panel-body // -->
+        </section><!-- panel// -->
+          
+            
+        </div> <!-- container// -->
+        

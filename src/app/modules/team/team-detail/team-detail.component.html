@@ -18,12 +18,13 @@
               
                  </div>  
             </div>
+            <br>
           </div>
           
           
           <div class="col-9">
           <table class="table" >
-              <thead>
+              <thead class="thead-dark">
                 <tr>
                   <th scope="col">Check</th>
                   <th scope="col">No</th>
@@ -38,28 +39,10 @@
                     <div class="form-check">
                         <input class="form-check-input position-static" type="checkbox" id="{{account.idAccount}}" name="{{account.idAccount}}" [(ngModel)]="account.isChecked" (change)="changeSelection()">
                       </div>
-                    <!-- <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="{{account.idAccount}}" checked>
-                    </div> -->
                   </td>
-                <td [style.color]="getColor(account.roleInTeam)">{{i+1}}</td>
-                <td [style.color]="getColor(account.roleInTeam)">{{account.lastName + " " + account.firstName}}</td>
-                  <td [style.color]="getColor(account.roleInTeam)">{{account.email}}</td>
-                  <!-- <td>
-                      <ul appBorderColor class="list-inline m-0">
-                        <li class="list-inline-item">
-                          <a [routerLink]="['detail', team.idTeam]"><button class="btn btn-primary btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="View"><i class="fa fa-table"></i></button></a>
-                      </li>
-                      <li class="list-inline-item">
-                        <a [routerLink]="['update', team.idTeam]"><button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></button></a>
-                      </li>
-                      <li class="list-inline-item">
-                          <button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Delete" (click)="deleteTeam(team.idTeam)"><i class="fa fa-trash"></i></button>
-                      </li>
-                      </ul> -->
-                      <!-- <a [routerLink]="['/detail', product.id]" data-tip="Quick View"><i class="fa fa-search"></i></a>
-                      <a routerLink="addproduct" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a> -->
-                  <!-- </td>  -->
+                <td [style.fontWeight]="getColor(account.roleInTeam)">{{i+1}}</td>
+                <td [style.fontWeight]="getColor(account.roleInTeam)">{{account.lastName + " " + account.firstName}}</td>
+                  <td [style.fontWeight]="getColor(account.roleInTeam)">{{account.email}}</td>
                 </tr> 
               </tbody>
             </table>

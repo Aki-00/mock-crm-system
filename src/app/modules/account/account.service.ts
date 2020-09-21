@@ -11,7 +11,7 @@ export class AccountService {
 
   private url: string = 'https://moly7x.codes/api/admin/v1';
   headers = {headers: {'Content-Type': 'application/json'}};
-  account = [];
+  account= [];
 
   getAccounts(){
     return this.http.get(`${this.url}/accounts`, this.headers);

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';  
 // import { TokenType } from '../constants/token_types';
 import { Observable } from 'rxjs';
 
@@ -18,6 +19,11 @@ export class BaseService {
   getHeaders(){
     return {headers: {'Content-Type': 'application/json'}};
   }
+
+  getHeaderFile(){
+    return {headers: {'Content-Type': 'multipart/form-data'}};
+  }
+
   constructor(private http: HttpClient) { }
 
   httpGet(url: string): Observable<any>{
@@ -38,6 +44,17 @@ export class BaseService {
     return this.http.request('DELETE',url, {
       headers:{'Content-Type': 'application/json'},
       body: body
-  });
+  }); 
+}
+
+    httpPostFile(url:string, body?:any){
+      let headers = new HttpHeaders();  
+  
+    headers.append('Content-Type', 'multipart/form-data');  
+    headers.append('Accept', 'application/json');  
+  
+    const httpOptions = { headers: headers };  
+
+  return this.http.post(url,body,httpOptions);
 }
 }
