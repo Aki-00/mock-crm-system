@@ -10,8 +10,7 @@ import * as teamActions from '../state/team.actions'
 import Swal from 'sweetalert2';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import { Subject } from 'rxjs';
+
 
 @Component({
   selector: 'app-add-team',
@@ -29,26 +28,20 @@ export class AddTeamComponent implements OnInit {
   reg1 = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
   accounts =[];
   emails = [];
-  filteredOptions: Observable<string[]>;
+  filteredAccounts;
 
   
   ngOnInit(): void {
     this.addteamForm = this.fb.group({
       teamName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.pattern(this.reg1)]]
+      email: ['', Validators.required]
     });
 
     this.teamService.getAccounts().subscribe((res:any) =>{
       this.accounts = res;
-      this.emails = this.accounts.map(a=>a.email);
-
-      this.filteredOptions=this.addteamForm.get("email").valueChanges
-    .pipe(
-      startWith(''),
-      map(value => this._filter(value))
-    );
     })
   }
+
 // Filter email
   private _filter(value: string): string[] {
     console.log(this.emails);
@@ -67,11 +60,25 @@ export class AddTeamComponent implements OnInit {
   //   })
     
   // }
+  filterAccount(event) {
+    console.log(this.accounts)
+    let filtered : any[] = [];
+    let query = event.query;
+    for(let i = 0; i < this.accounts.length; i++) {
+        let account = this.accounts[i];
+        if (account.email.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+            filtered.push(account);
+        }
+    }
+    
+    this.filteredAccounts = filtered;
+}
+
 
   handleAddTeam(){
     const team:Team={
       teamName: this.addteamForm.get('teamName').value,
-      email: this.addteamForm.get('email').value
+      email: this.addteamForm.get('email').value.email,
     };
 
     console.log(team);

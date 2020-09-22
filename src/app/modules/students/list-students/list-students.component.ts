@@ -5,7 +5,6 @@ import {TableModule} from 'primeng/table';
 import { Table } from 'primeng/table';
 import {DialogService, DynamicDialogRef} from 'primeng/dynamicdialog';
 import { AssignToAdvisorComponent } from '../assign-to-advisor/assign-to-advisor.component';
-import {MessageService} from 'primeng/api';
 import { AssignStudentComponent } from '../assign-student/assign-student.component';
 import Swal from 'sweetalert2';
 
@@ -13,11 +12,11 @@ import Swal from 'sweetalert2';
   selector: 'app-list-students',
   templateUrl: './list-students.component.html',
   styleUrls: ['./list-students.component.scss'],
-  providers:[DialogService, MessageService]
+  providers:[DialogService]
 })
 export class ListStudentsComponent implements OnInit {
 
-  constructor(private studentService:StudentService, public dialogService:DialogService, public messageService: MessageService) { }
+  constructor(private studentService:StudentService, public dialogService:DialogService) { }
 
   students:Student[];
   selectedStudents:any[];
@@ -25,15 +24,12 @@ export class ListStudentsComponent implements OnInit {
   checkedIDs = [];
   cols:any[];
   sources:any[];
-  message:string;
   ref1: DynamicDialogRef;
   ref2: DynamicDialogRef;
   @ViewChild('dt') table: Table;
   @ViewChild('fileInput') fileInput;  
 
   ngOnInit(): void {
-    // this.primengConfig.ripple = true;
-
     this.fetchStudent();
       this.sources =[
         {label:'Email', value:'Email'},
@@ -102,13 +98,15 @@ export class ListStudentsComponent implements OnInit {
   }  
 
 showTeamDialog(){
+  this.passID();
   this.checkedIDs = this.selectedStudents.map(a=>a.phoneNumber);
   this.ref1 = this.dialogService.open(AssignStudentComponent,{
     data:{
       checkedStudent:this.checkedIDs
     },
     header:"Choose a Team",
-    width:"70%"
+    width:"50%",
+    height:"auto"
   });
 }
 
@@ -119,7 +117,8 @@ showAdvisorDialog(){
       checkedStudent:this.checkedIDs
     },
     header:"Choose a Advisor",
-    width:"70%"
+    width:"50%",
+    height:"auto"
   });
 }
   }

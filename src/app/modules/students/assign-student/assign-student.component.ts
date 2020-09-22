@@ -11,8 +11,8 @@ import Swal from 'sweetalert2';
 import {Observable} from 'rxjs';
 import {map, startWith, ignoreElements} from 'rxjs/operators';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import { Subject } from 'rxjs';
-import {BehaviorSubject} from 'rxjs';
+import {DynamicDialogRef} from 'primeng/dynamicdialog';
+import {DynamicDialogConfig} from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-assign-student',
@@ -33,6 +33,7 @@ export class AssignStudentComponent implements OnInit {
   fullNames=[];
   listPhoneNumberStudent;
   isDisable=false;
+  filteredTeams:any[];
 
   constructor(private fb:FormBuilder, private router:Router, private teamService:TeamService, private accountService:AccountService, private studentService:StudentService ) {
     this.listPhoneNumberStudent = studentService.getOption();
@@ -47,7 +48,7 @@ export class AssignStudentComponent implements OnInit {
 
     this.fetchTeam();
 
-    this.fetchAccount();
+    // this.fetchAccount();
 
   }
 
@@ -66,21 +67,29 @@ export class AssignStudentComponent implements OnInit {
   fetchTeam(){
     this.teamService.getTeams().subscribe(res=>{
       this.teams=res;
-      this.teamFilteredOptions=this.assignStudentForm.get("team").valueChanges
-    .pipe(
-      startWith(''),
-      map(value => typeof value === 'string' ? value : value.teamName),
-      map(name => name ? this.filterTeam(name) : this.teams.slice())
-    );
     })
 
   }
 
-  filterTeam(name: string):Team[]{
-    console.log(this.teams);
-    const filterValue = name.toString().toLowerCase();
-    return this.teams.filter(team => team.teamName.toLowerCase().indexOf(filterValue)=== 0);
-  }
+  // filterTeam(name: string):Team[]{
+  //   console.log(this.teams);
+  //   const filterValue = name.toString().toLowerCase();
+  //   return this.teams.filter(team => team.teamName.toLowerCase().indexOf(filterValue)=== 0);
+  // }
+
+  filterTeam(event) {
+    console.log(this.teams)
+    let filtered : any[] = [];
+    let query = event.query;
+    for(let i = 0; i < this.teams.length; i++) {
+        let team = this.teams[i];
+        if (team.teamName.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+            filtered.push(team);
+        }
+    }
+    
+    this.filteredTeams = filtered;
+}
 
 
 fetchAccount(){

@@ -18,6 +18,9 @@ import { TeamDetailComponent } from './team-detail/team-detail.component';
 import { AddAccountToTeamComponent } from './add-account-to-team/add-account-to-team.component';
 
 import { MatDialogModule } from '@angular/material/dialog';
+import {DynamicDialogModule} from 'primeng/dynamicdialog';
+import {AutoCompleteModule} from 'primeng/autocomplete';
+import { TeamService } from './team.service';
 
 @NgModule({
   declarations: [ListTeamComponent, AddTeamComponent, TeamDetailComponent, AddAccountToTeamComponent],
@@ -31,12 +34,11 @@ import { MatDialogModule } from '@angular/material/dialog';
     EffectsModule.forFeature([TeamEffects]),
     MatAutocompleteModule,
     MatInputModule,
-    MatDialogModule
+    MatDialogModule,
+    DynamicDialogModule,
+    AutoCompleteModule
   ],
-  exports:[
-    MatInputModule,
-    MatAutocompleteModule
-  ],
+  providers:[TeamService],
   entryComponents:[AddAccountToTeamComponent]
 })
 export class TeamModule { }

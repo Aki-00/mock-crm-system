@@ -5,17 +5,20 @@ import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import { Inject } from '@angular/core';
+import {DynamicDialogRef} from 'primeng/dynamicdialog';
+import {DynamicDialogConfig} from 'primeng/dynamicdialog';
+
 
 @Component({
   selector: 'app-add-account-to-team',
   templateUrl: './add-account-to-team.component.html',
-  styleUrls: ['./add-account-to-team.component.scss']
+  styleUrls: ['./add-account-to-team.component.scss'],
+  providers:[DynamicDialogRef,DynamicDialogConfig]
 })
 export class AddAccountToTeamComponent implements OnInit {
 
-  constructor(private teamService:TeamService, private router: ActivatedRoute,private _router:Router, private dialogRef: MatDialogRef<AddAccountToTeamComponent>,
-    @Inject(MAT_DIALOG_DATA) data) { 
-      this.accounts = data.accounts;
+  constructor(private teamService:TeamService, private router: ActivatedRoute,private _router:Router, public ref: DynamicDialogRef, public config: DynamicDialogConfig)
+ { 
     }
 
   accounts:Account[];
@@ -25,20 +28,19 @@ export class AddAccountToTeamComponent implements OnInit {
   idTeam:number;
 
   ngOnInit(): void {
-    // this.fetchData();
-    this.fetchCheckedIDs()
+    this.fetchData();
   }
 
-  // fetchData(){
-  //   this.router.params.subscribe((res: any) => {
-  //     this.idTeam = res.id;
-  //     this.idTeams.push(this.idTeam);
-  //     this.teamService.getAccountsNotInTeam(this.idTeam).subscribe((res: any) => {
-  //      this.accounts = res;
-  //      this.fetchCheckedIDs();  
-  //     })     
-  //   });
-  // }
+  fetchData(){
+    this.router.params.subscribe((res: any) => {
+      this.idTeam = res.id;
+      this.idTeams.push(this.idTeam);
+      this.teamService.getAccountsNotInTeam(this.idTeam).subscribe((res: any) => {
+       this.accounts = res;
+       this.fetchCheckedIDs();  
+      })     
+    });
+  }
 
   changeSelection() {
     this.fetchCheckedIDs()
@@ -82,8 +84,4 @@ export class AddAccountToTeamComponent implements OnInit {
                 })  
       });
   }
-
-  close() {
-    this.dialogRef.close();
-}
 }

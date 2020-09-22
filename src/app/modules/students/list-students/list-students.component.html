@@ -89,7 +89,7 @@
             <h3>Student list</h3>
     </div>
     <div class ="row">
-      <div class="col-md-6">  
+      <div class="col-md-4">  
         <input class="form-control" type="file" #fileInput />        
     </div>  
     <div>  
@@ -97,9 +97,7 @@
     </div> 
     
     <div class ="col text-right">
-      <!-- <a routerLink="assignTeam"><button class="btn btn-success mr-3" (click)="passID()">Assign to Team</button></a> -->
       <button class="btn btn-success mr-3" (click)="showTeamDialog()">Assign to Team</button>
-      <!-- <a routerLink="assignAdvisor"><button class="btn btn-success" (click)="passID()">Assign to Advisor</button></a> -->
       <button class="btn btn-success" (click)="showAdvisorDialog()">Assign to Advisor</button>
     </div> 
     </div>   
@@ -108,15 +106,14 @@
       <p-table #dt [columns]="cols" [value]="students" [paginator]="true" [rows]="10"
       [filterDelay]="0"
       [(selection)]="selectedStudents" dataKey="phoneNumber" autoLayout="true">
-        <ng-template pTemplate="caption">
+        <ng-template pTemplate="caption" >
           <div class="table-header">
             <span class="p-input-icon-left">
-                <i class="pi pi-search"></i>
-                <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="         Global Search" style="width:auto">
+                <input pInputText type="text" (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Search" style="width:auto">
             </span>
         </div>
         </ng-template>
-        <ng-template pTemplate="header" class="thead-dark">
+        <ng-template pTemplate="header">
             <tr>
               <th style="width: 3rem"></th>
               <th>No</th>
@@ -133,7 +130,7 @@
                 <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
               </th>
               <th style="width: 3rem"></th>
-              <th style="width: 3rem"></th>
+              <th style="width:auto"></th>
               <!-- <th>
                 <input pInputText type="text" (input)="dt.filter($event.target.value, 'lastName', 'startsWith')" placeholder="Search by Last Name" class="p-column-filter">
                  </th> -->
@@ -141,17 +138,17 @@
               <input pInputText type="text" (input)="dt.filter($event.target.value, 'firstName', 'startsWith')" placeholder="Search by First Name" class="p-column-filter">
               </th> -->
                <th>
-              <input pInputText type="text" (input)="dt.filter($event.target.value, 'source', 'startsWith')" placeholder="Search Source" class="p-column-filter" style="width:100%;font-size: 15px">
+              <input pInputText type="text" (input)="dt.filter($event.target.value, 'source', 'startsWith')" placeholder="Search Source" class="p-column-filter" style="width:100%;font-size: 10px">
               </th>
               <th style="width: 3rem"></th>
               <th>
-                <input pInputText type="text" (input)="dt.filter($event.target.value, 'targets', 'startsWith')" placeholder="Search Target" class="p-column-filter" style="width:100%;font-size: 15px">
+                <input pInputText type="text" (input)="dt.filter($event.target.value, 'targets', 'startsWith')" placeholder="Search Target" class="p-column-filter" style="width:100%;font-size: 10px">
                 </th>
                 <th>
-                  <input pInputText type="text" (input)="dt.filter($event.target.value, 'status', 'startsWith')" placeholder="Search Status" class="p-column-filter" style="width:100%;font-size: 15px">
+                  <input pInputText type="text" (input)="dt.filter($event.target.value, 'status', 'startsWith')" placeholder="Search Status" class="p-column-filter" style="width:100%;font-size: 10px">
                   </th>
                   <th>
-                    <input pInputText type="text" (input)="dt.filter($event.target.value, 'teamName', 'startsWith')" placeholder="Search Team" class="p-column-filter" style="width:100%;font-size: 15px">
+                    <input pInputText type="text" (input)="dt.filter($event.target.value, 'teamName', 'startsWith')" placeholder="Search Team" class="p-column-filter" style="width:100%;font-size: 10px">
                     </th>
              <!-- <th>
               <input pInputText type="text" (input)="dt.filter($event.target.value, 'phoneNumber', 'startsWith')" placeholder="Search by Phone Number" class="p-column-filter">

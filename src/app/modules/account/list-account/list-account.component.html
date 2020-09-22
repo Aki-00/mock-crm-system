@@ -19,7 +19,7 @@
               <th scope="col">Gender</th>
               <th scope="col">Team</th>
               <th scope="col">Role</th>
-              <th scope="col">Action</th>
+              <!-- <th scope="col">Action</th> -->
             </tr>
           </thead>
           <tbody>
@@ -30,9 +30,9 @@
               <td>{{account.firstName}}</td>
               <td>{{account.lastName}}</td>
               <td>{{account.gender}}</td>
-              <td>{{account.team}}</td>
+              <td>{{account.teamName}}</td>
               <td>{{account.nameRole}}</td>
-              <td>
+              <!-- <td>
                   <ul appBorderColor class="list-inline m-0">
                       <li class="list-inline-item">
                           <a [routerLink]="['detail', account.idAccount]"><button class="btn btn-primary btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="View"><i class="fa fa-table"></i></button></a>
@@ -43,10 +43,10 @@
                       <li class="list-inline-item">
                           <button class="btn btn-danger btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Delete" (click)="deleteAccount(account.idAccount)"><i class="fa fa-trash"></i></button>
                       </li>
-                  </ul> 
+                  </ul>  -->
                   <!-- <a [routerLink]="['/detail', product.id]" data-tip="Quick View"><i class="fa fa-search"></i></a>
-                  <a routerLink="addproduct" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a> -->
-               </td> 
+                  <a routerLink="addproduct" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a>
+                </td>  -->
             </tr> 
           </tbody>
         </table>

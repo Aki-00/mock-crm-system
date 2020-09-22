@@ -34,7 +34,6 @@
               </thead>
               <tbody>
                  <tr *ngFor = 'let account of accounts; let i = index'> 
-                <!-- <th scope="row" disable>{{team.idTeam}}</th>  -->
                 <td>
                     <div class="form-check">
                         <input class="form-check-input position-static" type="checkbox" id="{{account.idAccount}}" name="{{account.idAccount}}" [(ngModel)]="account.isChecked" (change)="changeSelection()">

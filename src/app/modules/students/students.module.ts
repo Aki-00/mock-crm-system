@@ -12,7 +12,6 @@ import { AssignToAdvisorComponent } from './assign-to-advisor/assign-to-advisor.
 import {TableModule} from 'primeng/table';
 import {FileUploadModule} from 'primeng/fileupload';
 import {DynamicDialogModule} from 'primeng/dynamicdialog';
-import { ToastModule } from 'primeng/toast';
 import {AutoCompleteModule} from 'primeng/autocomplete';
 
 
@@ -29,7 +28,6 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
     TableModule,
     FileUploadModule,
     DynamicDialogModule,
-    ToastModule,
     AutoCompleteModule
   ],
   providers:[StudentService],

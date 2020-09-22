@@ -30,7 +30,7 @@
                 </div>
                </div>   -->
                <form class="form-horizontal" role="form" [formGroup]="assignStudentForm" (ngSubmit)="handleAssignStudent()" >
-             <p-autoComplete formControlName="account" [suggestions]="filteredAccounts" (completeMethod)="filterAccount($event)"
+             <p-autoComplete appendTo="body" formControlName="account" [suggestions]="filteredAccounts" (completeMethod)="filterAccount($event)"
             [dropdown]="true" field="email" [forceSelection]="true">
             <ng-template let-account pTemplate="item">
               <div class="country-item">
@@ -43,7 +43,7 @@
               <div class="col-sm-offset-3 col-sm-9">
                 <button type="submit" class="btn btn-primary mr-3" [disabled]="!assignStudentForm.valid" (click)="handleAssignStudent()">Submit</button>
                 <!-- <a routerLink="/students"><button type="button" class="btn btn-secondary">Cancel</button></a> -->
-                <button type="button" class="btn btn-secondary" (click)="onClose()">Cancel</button>
+                <!-- <button type="button" class="btn btn-secondary" (click)="onClose()">Cancel</button> -->
               </div>
             </div> <!-- form-group // -->
           </form> 

@@ -1,6 +1,6 @@
 
 <div class="container"> 
-    <section class="panel panel-default">
+    <!-- <section class="panel panel-default">
         <div class="panel-heading"> 
           <h3 class="panel-title">Assign to team</h3> 
         </div> 
@@ -28,11 +28,10 @@
                   </mat-option>
                 </mat-autocomplete>
        
-                <!-- <li *ngIf="addteamForm.get('email').value.length == 0 && addteamForm.get('email').touched" class="text text-danger">Email Is Required</li>
-                  <li *ngIf="addteamForm.get('email').errors?.pattern && addteamForm.get('email').touched" class="text text-danger">Email is not right format</li> -->
+        
               </mat-form-field>
                 </div>
-               </div>
+               </div> -->
 
 
                <!-- <div class="form-group">
@@ -61,20 +60,27 @@
               <!-- </mat-form-field>
                 </div>
                </div> -->
+               <form class="form-horizontal" role="form" [formGroup]="assignStudentForm" (ngSubmit)="handleAssignStudent()" >
+                <p-autoComplete appendTo="body" formControlName="team" [suggestions]="filteredTeams" (completeMethod)="filterTeam($event)"
+               [dropdown]="true" field="idTeam" [forceSelection]="true">
+               <ng-template let-team pTemplate="item">
+                 <div class="country-item">
+                     <div>{{team.teamName}}</div>
+                 </div>
+             </ng-template>
+             </p-autoComplete>         
           
-
-            
             <hr>
+            
             <div class="form-group">
               <div class="col-sm-offset-3 col-sm-9">
                 <button type="submit" class="btn btn-primary mr-3" [disabled]="!assignStudentForm.valid">Submit</button>
-                <a routerLink="/students"><button type="button" class="btn btn-secondary">Cancel</button></a>
               </div>
             </div> <!-- form-group // -->
           </form>
             
-          </div><!-- panel-body // -->
-        </section><!-- panel// -->
+          <!--</div> panel-body //
+        </section>panel// -->
           
             
         </div> <!-- container// -->

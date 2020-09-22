@@ -3,24 +3,26 @@ import { Account} from '../../../models/account';
 import { TeamService} from '../team.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
-
-import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import { AddAccountToTeamComponent } from '../add-account-to-team/add-account-to-team.component';
+import { Table } from 'primeng/table';
+import {DialogService, DynamicDialogRef} from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-team-detail',
   templateUrl: './team-detail.component.html',
+  providers:[DialogService],
   styleUrls: ['./team-detail.component.scss']
 })
 export class TeamDetailComponent implements OnInit {
 
-  constructor(private teamService:TeamService, private router: ActivatedRoute, private dialog: MatDialog ) { }
+  constructor(private teamService:TeamService, private router: ActivatedRoute, public dialogService:DialogService ) { }
   accounts:Account[];
   selectedItemsList = [];
   checkedIDs = [];
   idTeams =[];
   idTeam:number;
   teamName:string;
+  ref: DynamicDialogRef;
 
   ngOnInit(): void {
     this.fetchData();
@@ -108,13 +110,11 @@ export class TeamDetailComponent implements OnInit {
 
   openDialog() {
 
-    this.teamService.getAccountsNotInTeam(this.idTeam).subscribe(res=>{
-      this.dialog.open(AddAccountToTeamComponent, {
-        panelClass: 'my-centered-dialog',
-        disableClose: true,
-        data:{accounts :res}
-        });
-    })
+    this.ref = this.dialogService.open(AddAccountToTeamComponent,{
+      header:"Choose account to add to team",
+      width:"70%",
+      height:"auto"
+    });
   }
 
 }
