@@ -112,27 +112,40 @@ fetchAccount(){
     console.log('team',this.idTeam);
     console.log('student',this.listPhoneNumberStudent);
 
-    this.studentService.assignStudent(passAccounts, this.idTeam, this.listPhoneNumberStudent).subscribe(
+    this.studentService.assignStudent(this.idTeam, passAccounts,this.listPhoneNumberStudent).subscribe(
       (data) => { 
         console.log("sucess");
-        Swal.fire(
-          'Good job!',
-          'You assigned student for advisor!',
-          'success'
-        )
-        this.router.navigateByUrl('/students')
+        Swal.fire({
+          title: 'Good job!',
+          text: "You assigned student for advisor!",
+          icon: 'success',
+          showCancelButton: false,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'OK'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            location.reload();
+          }
+        })
+     
       }, 
       (error) => {
         console.log("err", error.error.message); 
         Swal.fire({
-                  icon: 'error',
-                  title: 'Oops...',
-                  text: error.error.message,
-                })  
+          title: 'Oops...',
+          text: error.error.message,
+          icon: 'error',
+          showCancelButton: false,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'OK'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            location.reload();
+          }
+        })
       });
   }
 
-  onClose(){
-    this.ref.close();
-  }
 }

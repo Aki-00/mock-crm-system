@@ -62,7 +62,7 @@
                </div> -->
                <form class="form-horizontal" role="form" [formGroup]="assignStudentForm" (ngSubmit)="handleAssignStudent()" >
                 <p-autoComplete appendTo="body" formControlName="team" [suggestions]="filteredTeams" (completeMethod)="filterTeam($event)"
-               [dropdown]="true" field="idTeam" [forceSelection]="true">
+               [dropdown]="true" field="teamName" [forceSelection]="true">
                <ng-template let-team pTemplate="item">
                  <div class="country-item">
                      <div>{{team.teamName}}</div>
