@@ -50,7 +50,7 @@ export class AssignToAdvisorComponent implements OnInit {
     } );
 
     // this.fetchAccount();
-    this.accountService.getAccounts().subscribe(res=>{
+    this.accountService.getAccountNotInTeam().subscribe(res=>{
       this.accounts=res;
     })
 
@@ -112,7 +112,7 @@ fetchAccount(){
     console.log('team',this.idTeam);
     console.log('student',this.listPhoneNumberStudent);
 
-    this.studentService.assignStudent(passAccounts, this.checkAccount, this.listPhoneNumberStudent).subscribe(
+    this.studentService.assignStudent(passAccounts, this.idTeam, this.listPhoneNumberStudent).subscribe(
       (data) => { 
         console.log("sucess");
         Swal.fire(

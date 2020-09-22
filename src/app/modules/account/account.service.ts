@@ -21,6 +21,10 @@ export class AccountService {
     return this.http.post(`${this.url}/accounts`, account, this.headers);
   }
 
+  getAccountNotInTeam(){
+    return this.http.get(`${this.url}/teamDetails/accountNotInTeam`, this.headers);
+  }
+
 }
 
 
