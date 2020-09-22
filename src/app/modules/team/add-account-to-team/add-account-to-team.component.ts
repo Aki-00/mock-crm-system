@@ -61,27 +61,60 @@ export class AddAccountToTeamComponent implements OnInit {
         console.log(message);
         if(message.message=="WARNING"){
           Swal.fire({
-            icon: 'warning',
             title: message.message,
             text: message.details,
-          })  
+            icon: 'warning',
+            showCancelButton: false,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'OK'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              location.reload();
+            }
+          })
+          
+          // Swal.fire({
+          //   icon: 'warning',
+          //   title: message.message,
+          //   text: message.details,
+          // })  
         };
         if(message.message=="SUCCESS"){
           Swal.fire({
-            icon: 'success',
             title: message.message,
             text: message.details,
-          }) 
+            icon: 'success',
+            showCancelButton: false,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'OK'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              location.reload();
+            }
+          })
+
+
+          
         };
-        this._router.navigateByUrl(`/teams/detail/${this.idTeam}`)
+      
       }, 
       (error) => {
-        console.log("err", error.error.message); 
         Swal.fire({
-                  icon: 'error',
-                  title: 'Oops...',
-                  text: error.error.message,
-                })  
+          title: 'Oops...',
+          text: error.error.message,
+          icon: 'error',
+          showCancelButton: false,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'OK'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            location.reload();
+          }
+        })
+
       });
   }
 }

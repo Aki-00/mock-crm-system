@@ -45,35 +45,20 @@ export class AddAccountComponent implements OnInit {
     this.accountService.createAccount(account).subscribe(
       (data) => { 
         console.log("sucess");
-        Swal.fire({
-          title: 'Good job!',
-          text: "You added account for team!",
-          icon: 'success',
-          showCancelButton: false,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'OK'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            location.reload();
-          }
-        })
+        Swal.fire(
+          'Good job!',
+          'You created an account!',
+          'success'
+        )
+        this.router.navigateByUrl('/accounts')
       }, 
       (error) => {
         console.log("err", error.error.message); 
         Swal.fire({
-          title: 'Oops...',
-          text: error.error.message,
-          icon: 'error',
-          showCancelButton: false,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'OK'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            location.reload();
-          }
-        })
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: error.error.message,
+                })  
       });
     }
       
